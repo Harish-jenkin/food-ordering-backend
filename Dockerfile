@@ -1,15 +1,17 @@
 
 FROM php:8.2-cli
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     unzip \
     libzip-dev \
-    && docker-php-ext-install \
+    libonig-dev \
+    && docker-php-ext-install -j$(nproc) \
     pdo_mysql \
     mbstring \
     bcmath \
     zip \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -32,4 +34,4 @@ RUN mkdir -p storage/framework/cache \
 
 EXPOSE 10000
 
-CMD ["sh", "-c", "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-10000}"]
+CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=${PORT:-10000}"]
