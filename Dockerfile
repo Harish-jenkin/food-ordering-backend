@@ -1,3 +1,4 @@
+
 FROM php:8.2-cli
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -33,4 +34,4 @@ RUN mkdir -p storage/framework/cache \
 
 EXPOSE 10000
 
-CMD php artisan serve --host=0.0.0.0 --port=${PORT:-10000}
+CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=${PORT:-10000}"]
