@@ -38,3 +38,9 @@ Route::prefix('admin')->group(function () {
         Route::put('/settings', [SettingAdminController::class, 'update']);
     });
 });
+Route::get('/health', function () {
+    return response()->json([
+        'success' => true,
+        'message' => 'Laravel API is running successfully',
+    ]);
+});
