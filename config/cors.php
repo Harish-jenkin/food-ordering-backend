@@ -5,9 +5,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [
-    'https://food-ordering-frontend-kohl.vercel.app/',
-],
+    'allowed_origins' => explode(',', env('CORS_ALLOWED_ORIGINS', 'http://localhost:5173,http://127.0.0.1:5173','https://food-ordering-frontend-kohl.vercel.app')),
 
     'allowed_origins_patterns' => [],
 
